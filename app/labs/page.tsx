@@ -3,7 +3,12 @@ import Link from "next/link";
 
 export default function Labs() {
     return (
+      
       <div id="wd-labs">
+        <h2>Madison Seal</h2>
+        <a id="wd-github" href="https://github.com/madisonseal/kambaz-next-js" target="_blank" rel="noreferrer">
+  GitHub Repository
+</a>
         <h1>Labs</h1>
         <ul>
           <li>
