@@ -5,10 +5,30 @@ import Float from "./Float";
 import { Container } from "react-bootstrap";
 import BootstrapGrids from "./BootstrapGrids";
 import BootstrapNavigation from "./BootstrapNavigation";
+import ForegroundColors from "./ForegroundColors";
+import BackgroundColors from "./BackgroundColors";
+import Borders from "./Borders";
+import Margins from "./Margins";
+import MediaQueriesDemo from "./MediaQueriesDemo";
+import ReactIconsSampler from "./ReactIconsSampler";
+import TailwindSpacing from "./tailwind/TailwindSpacing";
+import Corners from "./Corners";
+import Dimensions from "./Dimensions";
+import Flex from "./Flex";
+import GridLayout from "./GridLayout";
+import Zindex from "./Zindex";
+import TailwindTypography from "./tailwind/TailwindTypography";
+import TailwindBackgroundColors from "./tailwind/TailwindBackgroundColors";
+import TailwindResponsiveDesign from "./tailwind/TailwindResponsiveDesign";
+import TailwindFilters from "./tailwind/TailwindFilters";
+import TailwindGrids from "./tailwind/TailwindGrids";
+import ScreenSizeLabel from "./ScreenSizeLabel";
+import BootstrapTables from "./BootstrapTables";
+import BootstrapLists from "./BootstrapLists";
+import BootstrapForms from "./BootstrapForms";
 
 export default function Lab2() {
     return (
-       
          <Container>
            <div id="wd-lab2">
             <h2>Lab 2 - Cascading Style Sheets</h2>
@@ -57,6 +77,44 @@ export default function Lab2() {
             </div>
             </div>
         </div> 
+        <ForegroundColors />
+        <BackgroundColors />
+        <Borders />
+        <Padding />
+        <Margins />
+        <Corners />
+        <Dimensions />
+        <Positions />
+        <Zindex />
+        <Float />
+        <GridLayout />
+        <Flex />
+        <MediaQueriesDemo />
+        <ReactIconsSampler />
+        <TailwindSpacing />
+        <TailwindTypography />
+        <TailwindBackgroundColors />
+        <TailwindResponsiveDesign />
+        <TailwindFilters />
+        <TailwindGrids />
+        <BootstrapGrids />
+        <ScreenSizeLabel />
+        <BootstrapTables />
+        <BootstrapLists />
+        <BootstrapForms />
+        <BootstrapNavigation />
+
+
+
+
+
+
+
+
+        
+
+
+        
     </Container>
         
         );}

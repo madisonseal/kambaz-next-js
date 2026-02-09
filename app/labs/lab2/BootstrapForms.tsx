@@ -48,7 +48,7 @@ export default function BootstrapForms() {
 </div>
 <div id="wd-css-responsive-forms-1">
    <h3>Responsive forms</h3>
-   <Row className="mb-3" controlId="email1">
+   <Row className="mb-3">
        <FormLabel column sm={2}> Email </FormLabel>
        <Col sm={10}>
            <FormControl type="email" defaultValue="email@example.com" />

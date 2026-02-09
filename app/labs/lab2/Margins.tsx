@@ -1,4 +1,4 @@
-export default function Margin() {
+export default function Margins() {
     return(
 <div id="wd-css-margins">
   <h2>Margins</h2>

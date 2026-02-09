@@ -1,3 +1,4 @@
+"use client";
 import { ListGroup, ListGroupItem } from "react-bootstrap";
 
 export default function BootstrapLists() {
@@ -13,6 +14,7 @@ export default function BootstrapLists() {
 
     <div id="wd-css-hyperlink-list">
   <h3>Favorite books</h3>
+
   <ListGroup>
     <ListGroupItem   action active href="https://en.wikipedia.org/wiki/Dune_(novel)">
       Dune
