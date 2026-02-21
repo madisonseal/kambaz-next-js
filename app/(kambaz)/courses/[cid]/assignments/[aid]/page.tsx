@@ -1,20 +1,31 @@
 "use client";
-
+import { useParams } from "next/navigation";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
+import * as db from "../../../../database"
+import Link from "next/link";
 
 export default function AssignmentEditor() {
+  const {cid, aid} = useParams();
+
+  const assignment = db.assignments.find(
+    (a: any) => a._id === aid
+  )
+  
+
+
+ 
+
   return (
     <div id="wd-assignments-editor" className="p-3">
       <Form>
-
         <Form.Group className="mb-3">
           <Form.Label>Assignment Name</Form.Label>
           <Form.Control
             id="wd-name"
-            defaultValue="A1 - ENV + HTML"
+            defaultValue={assignment?.title}
           />
         </Form.Group>
 
@@ -24,7 +35,7 @@ export default function AssignmentEditor() {
             as="textarea"
             rows={6}
             id="wd-description"
-            defaultValue="The assignment is available online. Submit a link to the landing page of your Web application."
+            defaultValue={assignment?.description} 
           />
         </Form.Group>
 
@@ -33,7 +44,7 @@ export default function AssignmentEditor() {
           <Col sm={10}>
             <Form.Control
               type="number"
-              defaultValue={100}
+              defaultValue={assignment?.points}
             />
           </Col>
         </Form.Group>
@@ -90,7 +101,7 @@ export default function AssignmentEditor() {
               <div className="fw-bold mb-1">Due</div>
               <Form.Control
                 type="datetime-local"
-                defaultValue="2024-05-13T23:59"
+                defaultValue={assignment?.dueDate}
                 className="mb-2"
               />
 
@@ -99,14 +110,14 @@ export default function AssignmentEditor() {
                   <div className="fw-bold mb-1">Available from</div>
                   <Form.Control
                     type="datetime-local"
-                    defaultValue="2024-05-06T00:00"
+                    defaultValue={assignment?.availableDate}
                   />
                 </Col>
                 <Col>
                   <div className="fw-bold mb-1">Until</div>
                   <Form.Control
                     type="datetime-local"
-                    defaultValue="2024-05-20T23:59"
+                    defaultValue=""
                   />
                 </Col>
               </Row>
@@ -118,8 +129,8 @@ export default function AssignmentEditor() {
         <hr />
 
         <div>
-          <Button variant="secondary" className="me-2">Cancel</Button>
-          <Button variant="danger">Save</Button>
+          <Link href="./"> <Button variant="secondary" className="me-2">Cancel</Button> </Link>
+          <Link href="./"><Button variant="danger">Save</Button></Link>
         </div>
 
       </Form>

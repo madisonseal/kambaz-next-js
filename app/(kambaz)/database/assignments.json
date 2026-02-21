@@ -1,0 +1,249 @@
+[
+  {
+    "_id": "A101",
+    "title": "Propulsion Basics Quiz",
+    "course": "RS101",
+    "description": "A quiz covering the basic principles of rocket propulsion.",
+    "points": 100,
+    "dueDate": "2023-02-10T23:59",
+    "availableDate": "2023-02-03T00:00",
+    "availableUntilDate": "2023-02-10T23:59"
+  },
+  {
+    "_id": "A102",
+    "title": "Combustion Analysis Report",
+    "course": "RS101",
+    "description": "Write a report analyzing combustion processes in rocket engines.",
+    "points": 150,
+    "dueDate": "2023-03-01T23:59",
+    "availableDate": "2023-02-20T00:00",
+    "availableUntilDate": "2023-03-01T23:59"
+  },
+  {
+    "_id": "A103",
+    "title": "Nozzle Design Project",
+    "course": "RS101",
+    "description": "Design and optimize a rocket nozzle for a given set of requirements.",
+    "points": 200,
+    "dueDate": "2023-04-05T23:59",
+    "availableDate": "2023-03-20T00:00",
+    "availableUntilDate": "2023-04-05T23:59"
+  },
+
+  {
+    "_id": "A201",
+    "title": "Fluid Dynamics Problem Set",
+    "course": "RS102",
+    "description": "Solve a series of problems related to fluid dynamics and airflow.",
+    "points": 100,
+    "dueDate": "2023-02-15T23:59",
+    "availableDate": "2023-02-08T00:00",
+    "availableUntilDate": "2023-02-15T23:59"
+  },
+  {
+    "_id": "A202",
+    "title": "Airfoil Design Lab",
+    "course": "RS102",
+    "description": "Design and test an airfoil using simulation software.",
+    "points": 150,
+    "dueDate": "2023-03-10T23:59",
+    "availableDate": "2023-02-28T00:00",
+    "availableUntilDate": "2023-03-10T23:59"
+  },
+  {
+    "_id": "A203",
+    "title": "Supersonic Flow Essay",
+    "course": "RS102",
+    "description": "Write an essay on the challenges of supersonic and hypersonic flight.",
+    "points": 100,
+    "dueDate": "2023-04-10T23:59",
+    "availableDate": "2023-03-27T00:00",
+    "availableUntilDate": "2023-04-10T23:59"
+  },
+
+  {
+    "_id": "A301",
+    "title": "Spacecraft Materials Report",
+    "course": "RS103",
+    "description": "Research and report on materials used in spacecraft structural design.",
+    "points": 120,
+    "dueDate": "2023-02-20T23:59",
+    "availableDate": "2023-02-13T00:00",
+    "availableUntilDate": "2023-02-20T23:59"
+  },
+  {
+    "_id": "A302",
+    "title": "Orbital Mechanics Problem Set",
+    "course": "RS103",
+    "description": "Solve orbital mechanics problems related to mission planning.",
+    "points": 150,
+    "dueDate": "2023-03-15T23:59",
+    "availableDate": "2023-03-06T00:00",
+    "availableUntilDate": "2023-03-15T23:59"
+  },
+  {
+    "_id": "A303",
+    "title": "Spacecraft Systems Design Project",
+    "course": "RS103",
+    "description": "Design a complete spacecraft systems architecture for a given mission.",
+    "points": 250,
+    "dueDate": "2023-04-20T23:59",
+    "availableDate": "2023-04-03T00:00",
+    "availableUntilDate": "2023-04-20T23:59"
+  },
+
+  {
+    "_id": "A401",
+    "title": "Functional Groups Worksheet",
+    "course": "RS104",
+    "description": "Identify and classify functional groups in a series of organic compounds.",
+    "points": 80,
+    "dueDate": "2023-02-12T23:59",
+    "availableDate": "2023-02-05T00:00",
+    "availableUntilDate": "2023-02-12T23:59"
+  },
+  {
+    "_id": "A402",
+    "title": "Reaction Mechanisms Quiz",
+    "course": "RS104",
+    "description": "Quiz on organic reaction mechanisms and stereochemistry.",
+    "points": 100,
+    "dueDate": "2023-03-08T23:59",
+    "availableDate": "2023-03-01T00:00",
+    "availableUntilDate": "2023-03-08T23:59"
+  },
+  {
+    "_id": "A403",
+    "title": "Organic Synthesis Lab Report",
+    "course": "RS104",
+    "description": "Write a lab report detailing an organic synthesis experiment.",
+    "points": 175,
+    "dueDate": "2023-04-15T23:59",
+    "availableDate": "2023-04-01T00:00",
+    "availableUntilDate": "2023-04-15T23:59"
+  },
+
+  {
+    "_id": "A501",
+    "title": "Coordination Chemistry Problem Set",
+    "course": "RS105",
+    "description": "Solve problems related to coordination compounds and metal complexes.",
+    "points": 100,
+    "dueDate": "2023-02-18T23:59",
+    "availableDate": "2023-02-11T00:00",
+    "availableUntilDate": "2023-02-18T23:59"
+  },
+  {
+    "_id": "A502",
+    "title": "Crystal Field Theory Essay",
+    "course": "RS105",
+    "description": "Write an essay explaining crystal field theory and its applications.",
+    "points": 120,
+    "dueDate": "2023-03-20T23:59",
+    "availableDate": "2023-03-10T00:00",
+    "availableUntilDate": "2023-03-20T23:59"
+  },
+  {
+    "_id": "A503",
+    "title": "Inorganic Synthesis Lab Report",
+    "course": "RS105",
+    "description": "Document the synthesis and analysis of an inorganic compound.",
+    "points": 175,
+    "dueDate": "2023-04-18T23:59",
+    "availableDate": "2023-04-05T00:00",
+    "availableUntilDate": "2023-04-18T23:59"
+  },
+
+  {
+    "_id": "A601",
+    "title": "Thermodynamics Problem Set",
+    "course": "RS106",
+    "description": "Solve thermodynamics problems involving enthalpy, entropy, and free energy.",
+    "points": 100,
+    "dueDate": "2023-02-22T23:59",
+    "availableDate": "2023-02-15T00:00",
+    "availableUntilDate": "2023-02-22T23:59"
+  },
+  {
+    "_id": "A602",
+    "title": "Quantum Mechanics Quiz",
+    "course": "RS106",
+    "description": "Quiz covering quantum mechanics principles and spectroscopic methods.",
+    "points": 100,
+    "dueDate": "2023-03-22T23:59",
+    "availableDate": "2023-03-15T00:00",
+    "availableUntilDate": "2023-03-22T23:59"
+  },
+  {
+    "_id": "A603",
+    "title": "Reaction Dynamics Report",
+    "course": "RS106",
+    "description": "Analyze molecular behavior and reaction dynamics in a written report.",
+    "points": 150,
+    "dueDate": "2023-04-22T23:59",
+    "availableDate": "2023-04-10T00:00",
+    "availableUntilDate": "2023-04-22T23:59"
+  },
+
+  {
+    "_id": "A701",
+    "title": "Elvish Grammar Exercise",
+    "course": "RS107",
+    "description": "Complete grammar exercises in Sindarin and Quenya.",
+    "points": 80,
+    "dueDate": "2023-02-14T23:59",
+    "availableDate": "2023-02-07T00:00",
+    "availableUntilDate": "2023-02-14T23:59"
+  },
+  {
+    "_id": "A702",
+    "title": "Script Translation Assignment",
+    "course": "RS107",
+    "description": "Translate a passage written in Tengwar script into English.",
+    "points": 120,
+    "dueDate": "2023-03-14T23:59",
+    "availableDate": "2023-03-05T00:00",
+    "availableUntilDate": "2023-03-14T23:59"
+  },
+  {
+    "_id": "A703",
+    "title": "Linguistic History Essay",
+    "course": "RS107",
+    "description": "Write an essay on the historical development of a Middle-earth language.",
+    "points": 150,
+    "dueDate": "2023-04-14T23:59",
+    "availableDate": "2023-04-01T00:00",
+    "availableUntilDate": "2023-04-14T23:59"
+  },
+
+  {
+    "_id": "A801",
+    "title": "Races of Middle-earth Presentation",
+    "course": "RS108",
+    "description": "Present an overview of one race of Middle-earth and their diplomatic history.",
+    "points": 100,
+    "dueDate": "2023-02-16T23:59",
+    "availableDate": "2023-02-09T00:00",
+    "availableUntilDate": "2023-02-16T23:59"
+  },
+  {
+    "_id": "A802",
+    "title": "Council of Elrond Case Study",
+    "course": "RS108",
+    "description": "Analyze the Council of Elrond as a case study in inter-species diplomacy.",
+    "points": 150,
+    "dueDate": "2023-03-16T23:59",
+    "availableDate": "2023-03-07T00:00",
+    "availableUntilDate": "2023-03-16T23:59"
+  },
+  {
+    "_id": "A803",
+    "title": "War of the Ring Conflict Resolution Paper",
+    "course": "RS108",
+    "description": "Write a paper examining conflict resolution strategies during the War of the Ring.",
+    "points": 200,
+    "dueDate": "2023-04-25T23:59",
+    "availableDate": "2023-04-10T00:00",
+    "availableUntilDate": "2023-04-25T23:59"
+  }
+]
