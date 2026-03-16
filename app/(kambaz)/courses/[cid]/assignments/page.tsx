@@ -6,9 +6,21 @@ import LessonControlButtons from "../modules/LessonControlButtons";
 import { useParams } from "next/navigation";
 import * as db from "../../../database";
 
+import { useRouter } from "next/navigation";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../../../store";
+import { deleteAssignment } from "./reducer";
+import { BsTrash } from "react-icons/bs";
+
 export default function Assignments() {
   const { cid } = useParams();
-  const assignments = db.assignments;
+  const router = useRouter();
+  const dispatch = useDispatch();
+  const { assignments } = useSelector((state: RootState) => state.assignmentReducer);
+  const { currentUser } = useSelector((state: RootState) => state.accountReducer) as any;
+  const isFaculty = currentUser?.role === "FACULTY";
+
+  if (!currentUser) return <div className="p-4">Please sign in to view your dashboard.</div>;
 
   return (
     <div id="wd-assignments">
@@ -25,8 +37,15 @@ export default function Assignments() {
           />
         </div>
         <div className="d-flex gap-2">
-          <Button variant="secondary" id="wd-add-assignment-group">+ Group</Button>
-          <Button variant="danger" id="wd-add-assignment">+ Assignment</Button>
+        {isFaculty && (
+          <>
+            <Button variant="secondary" id="wd-add-assignment-group">+ Group</Button>
+            <Button variant="danger" id="wd-add-assignment"
+              onClick={() => router.push(`/courses/${cid}/assignments/new`)}>
+              + Assignment
+            </Button>
+          </>
+        )}
         </div>
       </div>
 
@@ -60,7 +79,16 @@ export default function Assignments() {
                     </div>
                   </div>
                 </div>
-                <LessonControlButtons/>
+              {isFaculty && (
+              <Button variant="danger" size="sm"
+                onClick={() => {
+                  if (window.confirm("Are you sure you want to delete this assignment?")) {
+                    dispatch(deleteAssignment(assignment._id));
+                  }
+                }}>
+                <BsTrash />
+              </Button>
+            )}
               </ListGroupItem>
             ))}
         </ListGroupItem>
