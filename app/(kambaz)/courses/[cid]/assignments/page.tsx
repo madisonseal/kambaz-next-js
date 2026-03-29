@@ -4,20 +4,37 @@ import { Button, ListGroup, ListGroupItem } from "react-bootstrap";
 import { BsGripVertical, BsJournalText, BsPlus, BsSearch, BsThreeDotsVertical } from "react-icons/bs";
 import LessonControlButtons from "../modules/LessonControlButtons";
 import { useParams } from "next/navigation";
-import * as db from "../../../database";
-
+ // import * as db from "../../../database";
+import * as client from "../../client";
 import { useRouter } from "next/navigation";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../../store";
-import { deleteAssignment } from "./reducer";
+// import { deleteAssignment } from "./reducer";
 import { BsTrash } from "react-icons/bs";
+import { useEffect, useState } from "react";
 
 export default function Assignments() {
   const { cid } = useParams();
   const router = useRouter();
   const dispatch = useDispatch();
-  const { assignments } = useSelector((state: RootState) => state.assignmentReducer);
+  // const { assignments } = useSelector((state: RootState) => state.assignmentReducer);
   const { currentUser } = useSelector((state: RootState) => state.accountReducer) as any;
+  const [assignments, setAssignments] = useState<any[]>([]);
+
+
+  const fetchAssignments = async () => {
+    const data =await client.findAssignmentsForCourse(cid as string);
+    setAssignments(data);
+  }
+
+  const deleteAssigment = async (assignmentId : string) => {
+    if (window.confirm("Are you sure you want to delete this assignment?")) {
+      await client.deleteAssignment(assignmentId);
+      setAssignments(assignments.filter((a) => a._id !== assignmentId));
+    }
+  }
+
+  useEffect(() => { fetchAssignments(); }, []);
   const isFaculty = currentUser?.role === "FACULTY";
 
   if (!currentUser) return <div className="p-4">Please sign in to view your dashboard.</div>;
@@ -83,7 +100,7 @@ export default function Assignments() {
               <Button variant="danger" size="sm"
                 onClick={() => {
                   if (window.confirm("Are you sure you want to delete this assignment?")) {
-                    dispatch(deleteAssignment(assignment._id));
+                    deleteAssigment(assignment.id);
                   }
                 }}>
                 <BsTrash />
