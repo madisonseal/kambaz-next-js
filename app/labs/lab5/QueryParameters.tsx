@@ -5,7 +5,7 @@ import { FormControl } from "react-bootstrap";
 export default function QueryParameters() {
     const [a, setA] = useState("34");
     const [b, setB] = useState("23")
-    const HTTP_SERVER = "http://localhost:4000";
+    const HTTP_SERVER = process.env.NEXT_PUBLIC_HTTP_SERVER || "http://localhost:4000";
     // const HTTP_SERVER = process.env.NEXT_PUBLIC_HTTP_SERVER;
     return (
 <div id="wd-query-parameters">

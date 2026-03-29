@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { FormControl } from "react-bootstrap";
 
 // const HTTP_SERVER = process.env.NEXT_PUBLIC_HTTP_SERVER;
-const HTTP_SERVER = "http://localhost:4000";
+const HTTP_SERVER = process.env.NEXT_PUBLIC_HTTP_SERVER || "http://localhost:4000";
 export default function WorkingWithArrays() {
    
 

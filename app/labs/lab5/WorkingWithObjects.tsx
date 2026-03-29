@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import { FormControl } from "react-bootstrap";
 // const HTTP_SERVER = process.env.NEXT_PUBLIC_HTTP_SERVER;
-const HTTP_SERVER = "http://localhost:4000";
+const HTTP_SERVER = process.env.NEXT_PUBLIC_HTTP_SERVER || "http://localhost:4000";
 export default function WorkingWithObjects() {
     const [assignment, setAssignment] = useState({
         id: 1, title: "NodeJS Assignment",
