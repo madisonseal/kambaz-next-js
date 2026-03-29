@@ -81,6 +81,8 @@ export const updateModule = async (module: any) => {
   export const unenrollFromCourse = async (courseId: string) => {
     await axiosWithCredentials.delete(`${USERS_API}/current/courses/${courseId}`);
   };
+
+  console.log("HTTP_SERVER:", process.env.NEXT_PUBLIC_HTTP_SERVER);
   
   
   
