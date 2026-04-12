@@ -59,14 +59,16 @@ useEffect(() => {
     enrollments.some((e : any) => e.user === currentUser._id && e.course === courseId);
 
     const handleEnroll = async (courseId: string) => {
-      await client.enrollInCourse(courseId);
+      await client.enrollIntoCourse("current", courseId);
       setEnrollments([...enrollments, { user: currentUser._id, course: courseId }]);
     };
-
+    
     const handleUnenroll = async (courseId: string) => {
-      await client.unenrollFromCourse(courseId);
+      await client.unenrollFromCourse("current", courseId);
       setEnrollments(enrollments.filter((e: any) => !(e.user === currentUser._id && e.course === courseId)));
     };
+
+    
 
 
 const onAddNewCourse = async () => {
@@ -88,13 +90,16 @@ const onUpdateCourse = async () => {
 
 
 
-const visibleCourses = showAll ? courses : courses.filter(c => isEnrolled(c._id));
+// const visibleCourses = showAll ? courses : courses.filter(c => isEnrolled(c._id));
+const visibleCourses = isFaculty ? courses : showAll ? courses : courses.filter((c) => isEnrolled(c._id));
 
 
  return (
   <div id="wd-dashboard">
    <h1 id="wd-dashboard-title">Dashboard
+   {!isFaculty && (
   <Button variant="primary" className="float-end" onClick={() => setShowAll(!showAll)}>Enrollments</Button>
+)}
 </h1> <hr />
    <h5>New Course ...   <button className="btn btn-primary float-end"
                   id="wd-add-new-course-click"
@@ -141,7 +146,7 @@ const visibleCourses = showAll ? courses : courses.filter(c => isEnrolled(c._id)
 
         </CardBody>
        </Link>
-       {showAll && (
+       {!isFaculty && showAll && (
      isEnrolled(c._id)
     ? <Button variant="danger" className="ms-2" onClick={() => handleUnenroll(c._id)}>Unenroll</Button>
     : <Button variant="success" className="ms-2" onClick={() => handleEnroll(c._id)}>Enroll</Button>

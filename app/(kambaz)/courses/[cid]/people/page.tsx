@@ -1,40 +1,41 @@
 "use client";
 import { Table } from "react-bootstrap";
 import { FaUserCircle } from "react-icons/fa";
-import * as db from "../../../database";
 import { useParams } from "next/navigation";
-
-
+import { useEffect, useState } from "react";
+import { findUsersForCourse } from "../../client";
 
 export default function PeopleTable() {
-    const {cid} = useParams();
-    const { users, enrollments } = db;
+  const { cid } = useParams();
+  const [users, setUsers] = useState<any[]>([]);
 
- return (
-  <div id="wd-people-table">
-   <Table striped>
-    <thead>
-     <tr><th>Name</th><th>Login ID</th><th>Section</th><th>Role</th><th>Last Activity</th><th>Total Activity</th></tr>
-    </thead>
-    <tbody>
-    {users
-    .filter((usr) =>
-      enrollments.some((enrollment) => enrollment.user === usr._id && enrollment.course === cid)
-    )
-    .map((user: any) => (
-      <tr key={user._id}>
-        <td className="wd-full-name text-nowrap align-middle">
-          <FaUserCircle className="me-2 fs-1 text-secondary" />
-          <span className="wd-first-name">{user.firstName} </span>
-          <span className="wd-last-name">{user.lastName}</span>
-        </td>
-        <td className="wd-login-id">{user.loginId}</td>
-        <td className="wd-section">{user.section}</td>
-        <td className="wd-role">{user.role}</td>
-        <td className="wd-last-activity">{user.lastActivity}</td>
-        <td className="wd-total-activity">{user.totalActivity}</td>
-      </tr>
-    ))}
-    </tbody>
-   </Table>
-  </div> );}
+  useEffect(() => {
+    if (cid) findUsersForCourse(cid as string).then(setUsers);
+  }, [cid]);
+
+  return (
+    <div id="wd-people-table">
+      <Table striped>
+        <thead>
+          <tr><th>Name</th><th>Login ID</th><th>Section</th><th>Role</th><th>Last Activity</th><th>Total Activity</th></tr>
+        </thead>
+        <tbody>
+        {users.filter((user: any) => user !== null).map((user: any) => (
+            <tr key={user._id}>
+              <td className="wd-full-name text-nowrap align-middle">
+                <FaUserCircle className="me-2 fs-1 text-secondary" />
+                <span className="wd-first-name">{user.firstName} </span>
+                <span className="wd-last-name">{user.lastName}</span>
+              </td>
+              <td className="wd-login-id">{user.loginId}</td>
+              <td className="wd-section">{user.section}</td>
+              <td className="wd-role">{user.role}</td>
+              <td className="wd-last-activity">{user.lastActivity}</td>
+              <td className="wd-total-activity">{user.totalActivity}</td>
+            </tr>
+          ))}
+        </tbody>
+      </Table>
+    </div>
+  );
+}

@@ -100,7 +100,7 @@ export default function Assignments() {
               <Button variant="danger" size="sm"
                 onClick={() => {
                   if (window.confirm("Are you sure you want to delete this assignment?")) {
-                    deleteAssigment(assignment.id);
+                    deleteAssigment(assignment._id);
                   }
                 }}>
                 <BsTrash />
