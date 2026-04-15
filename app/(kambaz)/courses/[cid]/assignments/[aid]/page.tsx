@@ -1,15 +1,17 @@
 "use client";
-import { useParams } from "next/navigation";
+import { useParams, useRouter} from "next/navigation";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import * as db from "../../../../database"
+import * as client from "../../../client";
 import Link from "next/link";
 
 
 export default function AssignmentEditor() {
   const {cid, aid} = useParams();
+  const router = useRouter();
 
   const assignment = db.assignments.find(
     (a: any) => a._id === aid
@@ -130,9 +132,23 @@ export default function AssignmentEditor() {
         <hr />
 
         <div>
-          <Link href="./"> <Button variant="secondary" className="me-2">Cancel</Button> </Link>
-          <Link href="./"><Button variant="danger">Save</Button></Link>
-        </div>
+  <Button variant="secondary" className="me-2"
+    onClick={() => router.push(`/courses/${cid}/assignments`)}>
+    Cancel
+  </Button>
+  <Button variant="danger" onClick={async () => {
+    const title = (document.getElementById("wd-name") as HTMLInputElement).value;
+    const description = (document.getElementById("wd-description") as HTMLTextAreaElement).value;
+    if (aid === "new") {
+      await client.createAssignment(cid as string, { title, description });
+    } else {
+      await client.updateAssignment({ _id: aid, title, description });
+    }
+    router.push(`/courses/${cid}/assignments`);
+  }}>
+    Save
+  </Button>
+</div>
 
       </Form>
     </div>
