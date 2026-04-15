@@ -1,67 +1,93 @@
+"use client";
+import { setModules, addModule, editModule, updateModule, deleteModule } from "./reducer";
+import * as client from "../../client";
+import { useSelector, useDispatch } from "react-redux";
+import { RootState } from "../../../store";
+import { useParams } from "next/navigation";
+import { useState, useEffect} from "react";
+import { ListGroup, FormControl } from "react-bootstrap";
+import ModuleControlButtons from "./ModuleControlButtons";
+import ModulesControls from "./modulesControls";
+
 export default function Modules() {
-    return (
-      <div>
-        <button>Collapse All</button> <button>View Progress</button> 
-        <select>
-        <option>Publish All</option>
-        <option>Unpublish All</option>
-        </select>
-      <button>+ Module</button>
-        <ul id="wd-modules">
-          <li className="wd-module">
-            <div className="wd-title">Week 1, Lecture 1 - Course Introduction, Syllabus, Agenda</div>
-            <ul className="wd-lessons">
-              <li className="wd-lesson">
-                <span className="wd-title">LEARNING OBJECTIVES</span>
-                <ul className="wd-content">
-                  <li className="wd-content-item">Introduction to the course</li>
-                  <li className="wd-content-item">Learn what is Web Development</li>
-                </ul>
-              </li>
-              <li className="wd-lesson">
-                <span className="wd-title">READING</span>
-                <ul className="wd-content">
-                  <li className="wd-content-item">Full Stack Developer - Chapter 1 - Introduction</li>
-                  <li className="wd-content-item">Full Stack Developer - Chapter 2 - Creating User</li>
-                </ul>
-              </li>
-              <li className="wd-lesson">
-                <span className="wd-title">SLIDES</span>
-                <ul className="wd-content">
-                  <li className="wd-content-item">Introduction to Web Development</li>
-                  <li className="wd-content-item">Creating a HTTP server with Node.js</li>
-                  <li className="wd-content-item">Creating a React Application</li>
-                </ul>
-              </li>
-            </ul>
-          </li>
-          <li className="wd-module">
-            <div className="wd-title">Week 1, Lecture 2 - Formatting User Interfaces with HTML</div>
-            <ul className="wd-lessons">
-              <li className="wd-lesson">
-                <span className="wd-title">LEARNING OBJECTIVES</span>
-                <ul className="wd-content">
-                  <li className="wd-content-item">Learn how to create user interfaces with HTML</li>
-                  <li className="wd-content-item">Deploy the assignment to Netify</li>
-                </ul>
-              </li>
-              <li className="wd-lesson">
-                <span className="wd-title">SLIDES</span>
-                <ul className="wd-content">
-                  <li className="wd-content-item">Introduction to HTML and the DOM</li>
-                  <li className="wd-content-item">Formatting Web content with Heading and </li>
-                  <li className="wd-content-item">Formatting content with Lists and Tables</li>
-                </ul>
-              </li>
-            </ul>
-          </li>
-          <li className="wd-module">
-            <div className="wd-title">Week 2</div>
-          </li>
-          <li className="wd-module">
-            <div className="wd-title">Week 3</div>
-          </li>
-        </ul>
-      </div>
-  );}
-  
+  const { currentUser } = useSelector((state: RootState) => state.accountReducer);
+  const isFaculty = (currentUser as any)?.role === "FACULTY";
+  const { cid } = useParams();
+  const [moduleName, setModuleName] = useState("");
+  const { modules } = useSelector((state: RootState) => state.modulesReducer);
+  const dispatch = useDispatch();
+  const onCreateModuleForCourse = async () => {
+    if (!cid) return;
+    const newModule = { name: moduleName, course: cid };
+    const module = await client.createModuleForCourse(cid as string, newModule);
+    dispatch(setModules([...modules, module]));
+  };
+
+
+  const fetchModules = async () => {
+    const modules = await client.findModulesForCourse(cid as string);
+    dispatch(setModules(modules));
+  };
+  useEffect(() => {
+    fetchModules();
+  }, []);
+
+  const onRemoveModule = async (moduleId: string) => {
+    await client.deleteModule(moduleId);
+    dispatch(setModules(modules.filter((m: any) => m._id !== moduleId)));
+  };
+
+  const onUpdateModule = async (module: any) => {
+    await client.updateModule(module);
+    const newModules = modules.map((m: any) => m._id === module._id ? module : m );
+    dispatch(setModules(newModules));
+  };
+
+
+
+  return (
+    <div className="wd-modules">
+      <ModulesControls 
+      moduleName={moduleName} 
+      setModuleName={setModuleName}
+      addModule={onCreateModuleForCourse}
+      isFaculty={isFaculty} />
+      
+      <ListGroup id="wd-modules" className="rounded-0">
+        {modules
+          .map((module: any) => (
+            <ListGroup.Item key={module._id} className="d-flex align-items-center">
+              <div>
+                {!module.editing && module.name}
+                { module.editing && (
+                  <FormControl 
+                  className="w-50 d-inline-block"
+                  defaultValue={module.name} 
+                    onChange={(e) =>
+                      dispatch(
+                        updateModule({ ...module, name: e.target.value })
+                      )
+                    }
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter") {
+                        onUpdateModule({ ...module, editing: false });
+
+                      }
+                    }}
+                  />  
+                )}
+                </div>
+
+                <ModuleControlButtons 
+                moduleId={module._id}
+                deleteModule={(moduleId) => onRemoveModule(moduleId)}
+                editModule={(moduleId) => dispatch(editModule(moduleId))}
+                isFaculty={isFaculty} />
+              </ListGroup.Item>
+        ))}
+      </ListGroup>
+    </div>
+    
+  );
+}
+

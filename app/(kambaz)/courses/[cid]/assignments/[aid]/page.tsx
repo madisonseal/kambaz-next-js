@@ -1,108 +1,156 @@
+"use client";
+import { useParams, useRouter} from "next/navigation";
+import Form from "react-bootstrap/Form";
+import Button from "react-bootstrap/Button";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
+import * as db from "../../../../database"
+import * as client from "../../../client";
+import Link from "next/link";
+
+
 export default function AssignmentEditor() {
-    return (
-      <div id="wd-assignments-editor">
-        <label>Assignment Name</label>
-        <input id="wd-name" defaultValue="A1 - ENV + HTML" /><br /><br />
-        
-        <textarea id="wd-description" rows={10} cols={50}>
-  The assignment is available online. Submit a link to the landing page of your Web application.
-        </textarea>
-        <br /><br />
-        
-        <table>
-          <tbody>
-            <tr>
-              <td>
-                <label>Points</label>
-              </td>
-              <td>
-                <input id="wd-points" defaultValue={100} />
-              </td>
-            </tr>
-            
-            <tr>
-              <td>
-                <label>Assignment Group</label>
-              </td>
-              <td>
-                <select id="wd-group">
-                  <option>ASSIGNMENTS</option>
-                  <option>QUIZZES</option>
-                  <option>EXAMS</option>
-                </select>
-              </td>
-            </tr>
-            
-            <tr>
-              <td>
-                <label>Display Grade as</label>
-              </td>
-              <td>
-                <select id="wd-display-grade">
-                  <option>Percentage</option>
-                </select>
-              </td>
-            </tr>
-            
-            <tr>
-              <td>
-                <label>Submission Type</label>
-              </td>
-              <td>
-                <select id="wd-submission-type">
-                  <option>Online</option>
-                </select>
-              </td>
-            </tr>
-            
-            <tr>
-              <td>
-                <label>Online Entry Options</label>
-              </td>
-              <td>
-                <input type="checkbox"/>
-                <label>Text Entry</label><br />
-                
-                <input type="checkbox"/>
-                <label>Website URL</label><br />
-                
-                <input type="checkbox"/>
-                <label >File Uploads</label>
-              </td>
-            </tr>
-            
-            <tr>
-              <td>
-                <label>Assign</label>
-              </td>
-              <td>
-                <label>Assign to</label><br />
-                <input id="wd-assign-to" defaultValue="Everyone" />
-              </td>
-            </tr>
-            
-            <tr>
-              <td>
-                <label>Due</label><br />
-                <input type="date" id="wd-due-date" defaultValue="2024-05-13" />
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <label>Available from</label><br />
-                <input type="date" id="wd-available-from" defaultValue="2024-05-06" />
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <label>Until</label><br />
-                <input type="date" id="wd-available-until" defaultValue="2024-05-20" />
-              </td>
-            </tr>
-          </tbody>
-        </table>
+  const {cid, aid} = useParams();
+  const router = useRouter();
+
+  const assignment = db.assignments.find(
+    (a: any) => a._id === aid
+  )
+  
+
+
+ 
+
+  return (
+    <div id="wd-assignments-editor" className="p-3">
+      <Form>
+        <Form.Group className="mb-3">
+          <Form.Label>Assignment Name</Form.Label>
+          <Form.Control
+            id="wd-name"
+            defaultValue={assignment?.title}
+          />
+        </Form.Group>
+
+        <Form.Group className="mb-3">
+          <Form.Label>Description</Form.Label>
+          <Form.Control
+            as="textarea"
+            rows={6}
+            id="wd-description"
+            defaultValue={assignment?.description} 
+          />
+        </Form.Group>
+
+        <Form.Group as={Row} className="mb-3">
+          <Form.Label column sm={2}>Points</Form.Label>
+          <Col sm={10}>
+            <Form.Control
+              type="number"
+              defaultValue={assignment?.points}
+            />
+          </Col>
+        </Form.Group>
+
+        <Form.Group as={Row} className="mb-3">
+          <Form.Label column sm={2}>Assignment Group</Form.Label>
+          <Col sm={10}>
+            <Form.Select>
+              <option>ASSIGNMENTS</option>
+              <option>QUIZZES</option>
+              <option>EXAMS</option>
+            </Form.Select>
+          </Col>
+        </Form.Group>
+
+        <Form.Group as={Row} className="mb-3">
+          <Form.Label column sm={2}>Display Grade as</Form.Label>
+          <Col sm={10}>
+            <Form.Select>
+              <option>Percentage</option>
+            </Form.Select>
+          </Col>
+        </Form.Group>
+
+        <Form.Group as={Row} className="mb-4">
+          <Form.Label column sm={2}>Submission Type</Form.Label>
+          <Col sm={10}>
+            <Form.Select className="mb-2">
+              <option>Online</option>
+            </Form.Select>
+
+            <div className="border p-2">
+              <div className="fw-bold mb-1">Online Entry Options</div>
+              <Form.Check label="Text Entry" />
+              <Form.Check label="Website URL" defaultChecked />
+              <Form.Check label="Media Recordings" />
+              <Form.Check label="Student Annotation" />
+              <Form.Check label="File Uploads" />
+            </div>
+          </Col>
+        </Form.Group>
+
+        <Form.Group as={Row} className="mb-4">
+          <Form.Label column sm={2}>Assign</Form.Label>
+          <Col sm={10}>
+            <div className="border p-2">
+
+              <div className="fw-bold mb-1">Assign to</div>
+              <Form.Control
+                defaultValue="Everyone"
+                className="mb-2"
+              />
+
+              <div className="fw-bold mb-1">Due</div>
+              <Form.Control
+                type="datetime-local"
+                defaultValue={assignment?.dueDate}
+                className="mb-2"
+              />
+
+              <Row>
+                <Col>
+                  <div className="fw-bold mb-1">Available from</div>
+                  <Form.Control
+                    type="datetime-local"
+                    defaultValue={assignment?.availableDate}
+                  />
+                </Col>
+                <Col>
+                  <div className="fw-bold mb-1">Until</div>
+                  <Form.Control
+                    type="datetime-local"
+                    defaultValue=""
+                  />
+                </Col>
+              </Row>
+
+            </div>
+          </Col>
+        </Form.Group>
+
         <hr />
-        <button>Cancel</button> <button>Save</button>
-      </div>
-    );
-  }
+
+        <div>
+  <Button variant="secondary" className="me-2"
+    onClick={() => router.push(`/courses/${cid}/assignments`)}>
+    Cancel
+  </Button>
+  <Button variant="danger" onClick={async () => {
+    const title = (document.getElementById("wd-name") as HTMLInputElement).value;
+    const description = (document.getElementById("wd-description") as HTMLTextAreaElement).value;
+    if (aid === "new") {
+      await client.createAssignment(cid as string, { title, description });
+    } else {
+      await client.updateAssignment({ _id: aid, title, description });
+    }
+    router.push(`/courses/${cid}/assignments`);
+  }}>
+    Save
+  </Button>
+</div>
+
+      </Form>
+    </div>
+  );
+}
