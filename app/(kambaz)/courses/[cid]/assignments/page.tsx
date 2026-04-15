@@ -17,6 +17,7 @@ export default function Assignments() {
   const { cid } = useParams();
   const router = useRouter();
   const dispatch = useDispatch();
+  
   // const { assignments } = useSelector((state: RootState) => state.assignmentReducer);
   const { currentUser } = useSelector((state: RootState) => state.accountReducer) as any;
   const [assignments, setAssignments] = useState<any[]>([]);

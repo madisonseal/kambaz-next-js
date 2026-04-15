@@ -53,7 +53,7 @@ useEffect(() => {
  
 
  if (!currentUser) return <div className="p-4">Please sign in to view your dashboard.</div>;
- const isFaculty = currentUser.role === "FACULTY";
+ const isNonStudent = currentUser.role !== "STUDENT";
 
     const isEnrolled = (courseId: string) =>
     enrollments.some((e : any) => e.user === currentUser._id && e.course === courseId);
@@ -96,6 +96,8 @@ const visibleCourses = showAll ? courses : courses.filter(c => isEnrolled(c._id)
    <h1 id="wd-dashboard-title">Dashboard
   <Button variant="primary" className="float-end" onClick={() => setShowAll(!showAll)}>Enrollments</Button>
 </h1> <hr />
+{isNonStudent && ( 
+  <>
    <h5>New Course ...   <button className="btn btn-primary float-end"
                   id="wd-add-new-course-click"
                   onClick={onAddNewCourse} > Add </button>
@@ -105,7 +107,7 @@ const visibleCourses = showAll ? courses : courses.filter(c => isEnrolled(c._id)
 </h5><br />
       <FormControl value={course.name} className="mb-2" onChange={(e) => setCourse({ ...course, name: e.target.value }) } />
       <FormControl value={course.description} as="textarea" rows={3} onChange={(e) => setCourse({ ...course, description: e.target.value }) }/>
-
+      </>)}
    <h2 id="wd-dashboard-published">Published Courses ({visibleCourses.length})</h2> <hr />
    <div id="wd-dashboard-courses">
     <Row xs={1} md={5} className="g-4">
@@ -120,7 +122,7 @@ const visibleCourses = showAll ? courses : courses.filter(c => isEnrolled(c._id)
           {c.name} </CardTitle>
          <CardText className="wd-dashboard-course-description overflow-hidden" style={{height:"100px"}}>
           {c.description} </CardText>
-          
+          {isNonStudent && (<>
          
          <button onClick={(event) => {
                       event.preventDefault();
@@ -138,6 +140,8 @@ const visibleCourses = showAll ? courses : courses.filter(c => isEnrolled(c._id)
   className="btn btn-warning me-2 float-end" >
   Edit
 </button>
+</>
+)}
 
         </CardBody>
        </Link>
