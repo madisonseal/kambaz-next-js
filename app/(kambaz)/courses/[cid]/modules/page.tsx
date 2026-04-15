@@ -10,6 +10,8 @@ import ModuleControlButtons from "./ModuleControlButtons";
 import ModulesControls from "./modulesControls";
 
 export default function Modules() {
+  const { currentUser } = useSelector((state: RootState) => state.accountReducer);
+  const isFaculty = (currentUser as any)?.role === "FACULTY";
   const { cid } = useParams();
   const [moduleName, setModuleName] = useState("");
   const { modules } = useSelector((state: RootState) => state.modulesReducer);
@@ -48,9 +50,8 @@ export default function Modules() {
       <ModulesControls 
       moduleName={moduleName} 
       setModuleName={setModuleName}
-      addModule={() => {
-      onCreateModuleForCourse
-      }} />
+      addModule={onCreateModuleForCourse}
+      isFaculty={isFaculty} />
       
       <ListGroup id="wd-modules" className="rounded-0">
         {modules
@@ -80,7 +81,8 @@ export default function Modules() {
                 <ModuleControlButtons 
                 moduleId={module._id}
                 deleteModule={(moduleId) => onRemoveModule(moduleId)}
-                editModule={(moduleId) => dispatch(editModule(moduleId))} />
+                editModule={(moduleId) => dispatch(editModule(moduleId))}
+                isFaculty={isFaculty} />
               </ListGroup.Item>
         ))}
       </ListGroup>
